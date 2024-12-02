@@ -1,0 +1,7 @@
+mkdir shared_folder
+mount -t 9p -o trans=virtio,version=9p2000.L FM shared_folder
+mkdir ltp
+cp -r shared_folder/* ltp
+cd ltp
+echo "0" > /proc/sys/kernel/unprivileged_bpf_disabled
+echo "y" | ./runltp -f morello_bpf
