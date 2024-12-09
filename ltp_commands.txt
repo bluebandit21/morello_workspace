@@ -5,6 +5,7 @@ cp -r shared_folder/* ltp
 cd ltp
 echo "0" > /proc/sys/kernel/unprivileged_bpf_disabled
 mount -t tracefs nodev /sys/kernel/tracing
+echo "2" > /proc/sys/net/core/bpf_jit_enable
 echo "y" | ./runltp -f morello_bpf
-cat /sys/kernel/tracing/trace_pipe
+tail /sys/kernel/tracing/trace_pipe
 
