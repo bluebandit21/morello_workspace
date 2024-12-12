@@ -7,8 +7,10 @@ mkdir /shared_folder
 mount -t 9p -o trans=virtio,version=9p2000.L FM shared_folder
 mkdir /ltp
 
-cp -r shared_folder/* /ltp
+cp -r /shared_folder/* /ltp
+
 cd /ltp
+cp -r /shared_folder/testcases/bin/bpf* ./testcases/bin/ #Faster iterative
 
 echo "y" | ./runltp -f morello_bpf
 cat /sys/kernel/tracing/trace_pipe
