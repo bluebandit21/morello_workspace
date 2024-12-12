@@ -1,12 +1,14 @@
-mkdir shared_folder
-mount -t 9p -o trans=virtio,version=9p2000.L FM shared_folder
-mkdir ltp
-cp -r shared_folder/* ltp
-cd ltp
 echo "0" > /proc/sys/kernel/unprivileged_bpf_disabled
 mount -t tracefs nodev /sys/kernel/tracing
 echo "1" > /sys/kernel/tracing/tracing_on
 echo "2" > /proc/sys/net/core/bpf_jit_enable
+
+mkdir /shared_folder
+mount -t 9p -o trans=virtio,version=9p2000.L FM shared_folder
+mkdir /ltp
+
+cp -r shared_folder/* ltp
+cd /ltp
+
 echo "y" | ./runltp -f morello_bpf
 cat /sys/kernel/tracing/trace_pipe
-
