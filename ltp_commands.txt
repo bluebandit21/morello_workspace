@@ -8,5 +8,5 @@ mount -t tracefs nodev /sys/kernel/tracing
 echo "1" > /sys/kernel/tracing/tracing_on
 echo "2" > /proc/sys/net/core/bpf_jit_enable
 echo "y" | ./runltp -f morello_bpf
-tail /sys/kernel/tracing/trace_pipe
+cat /sys/kernel/tracing/trace_pipe
 
